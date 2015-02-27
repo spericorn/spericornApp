@@ -6,29 +6,68 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Spericorn Technology Pvt Ltd</title>
 		<link href="css/style.css" rel="stylesheet">
+		<link href="css/fontwesome.css" rel="stylesheet">
 		<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
 		<script src="js/jquery.js"></script>
 		<script type="text/javascript" >
-			$.ajax({
-				type : 'GET',
-				url  :"http://spericorn.com/spapp/cfc/api.cfc?method=GetEmployers",
-				dataType:"JSON",
-				data: {},
-				success:function(data) {
-					var obj =data;
-					console.log(data);
-					
-					for(i=0;i<obj.DATA.length;i++){  
-						$('.logInfo').html(obj.DATA[i][1]);
+			var loginId = 0;
+			$( document ).ready(function() {
+				/*$('.loginWrap input').focusout(function() {
+					if(! $('.loginWrap input').hasClass('has-error') && $('.loginWrap input').val() !='' ){
+						checkLogin();
 					}
-				}
+				});
+				*/
+				window.addEventListener('load', function () {
+					document.addEventListener('deviceready', function () {
+						alert("PhoneGap is now loaded!");
+					}, false);
+				}, false);
+			
 			});
+			
+			function checkLogin(){
+				var email = $('.email_txt').val();
+				var password = $('.passwd_txt').val();
+				$('.has-error').removeClass('has-error');
+				$('.error').remove();
+				
+				if(email==''){	
+					errorDiv($('.email_txt'),'enter the email');
+				}
+				if(password==''){
+					errorDiv($('.passwd_txt'),'enter the password');
+				}
+				
+				if(email!='' && password!=''){
+					$.ajax({
+						type : 'GET',
+						url  :"http://spericorn.com/spapp/cfc/api.cfc?method=login",
+						dataType:"JSON",
+						data: {
+							email :email,
+							password : password
+						},
+						success:function(res) {
+							var res = $.trim(res);
+							if(res <=0){
+								errorDiv($('.login_btn'),'The email address or password that you entered is not valid');
+							}else{
+								loginId = res;
+							}
+						}
+					});
+				}
+			}
+			function errorDiv(ele,messege){							
+				$(ele).parent().append('<div class="error">'+messege+'</div>')
+				$(ele).addClass('has-error');				
+			}
 		</script>
 		
 	</head>
 	<body>
-		<div class="loginWrap" >
-			
+		<div class="loginWrap" style="display:block;">
 			<div class="loginWrapBody">		
 				<div class="logHead">
 					<img src="images/logo.png" />
@@ -36,24 +75,24 @@
 				<div class="logForm">
 					<div class="row">
 						<div class="inp_label">Email</div>
-						<div><input type="text" class="formControl"/></div>
+						<div><input type="text" class="formControl email_txt"/></div>
 					</div>
 					<div class="row">
 						<div class="inp_label">Password</div>
-						<div><input type="text" class="formControl"/></div>
+						<div><input type="text" class="formControl passwd_txt"/></div>
 					</div>
 					<div class="row">
-						<input type="submit" value="Login" class="btn btnSuccess login_btn">
+						<div><input type="submit" value="Login" class="btn btnSuccess login_btn" onclick="checkLogin()"></div>
 					</div>
 				</div>
 				<div class="logInfo">
 					Don't have an account? Create an account
 				</div>
 			</div>
-			
-			
 		</div>
 		
-	
+		<div class="employePortel">
+			
+		</div>
 	</body>
 </html>
