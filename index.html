@@ -54,6 +54,7 @@
 								errorDiv($('.login_btn'),'The email address or password that you entered is not valid');
 							}else{
 								loginId = res;
+								nextPage(1);
 							}
 						}
 					});
@@ -63,11 +64,33 @@
 				$(ele).parent().append('<div class="error">'+messege+'</div>')
 				$(ele).addClass('has-error');				
 			}
+			function getJobDetails(){
+				$.ajax({
+					type : 'GET',
+					url  :"http://spericorn.com/spapp/cfc/api.cfc?method=getSpJobs",
+					dataType:"JSON",
+					data: {},
+					success:function(res) {
+						var obj = res;
+						var appenString ='';
+						for(i=0;i<obj.DATA.length;i++){  
+							appenString = appenString+ '<div class="row"><div class="title">Job Code</div><div class="info">: '+obj.DATA[i][2]+'</div><div class="clear"></div></div><div class="row"><div class="title">Position</div><div class="info">: '+obj.DATA[i][1]+'</div><div class="clear"></div></div><div class="row"><div class="title">Closing Date</div><div class="info">: '+obj.DATA[i][4]+'</div><div class="clear"></div></div>'
+						}
+						$('.jobDetials .row').html(appenString);
+						nextPage(2);
+					}
+				});
+			}
+			
+			function nextPage(pos){
+				$('.pages').hide();
+				$('.pages_'+pos).fadeIn();
+			}
 		</script>
 		
 	</head>
 	<body>
-		<div class="loginWrap" style="display:block;">
+		<div class="loginWrap pages pages_0" >
 			<div class="loginWrapBody">		
 				<div class="logHead">
 					<img src="images/logo.png" />
@@ -91,8 +114,36 @@
 			</div>
 		</div>
 		
-		<div class="employePortel">
-			
+		<div class="employePortel pages pages_1" >
+			<div class="column">
+				<i class="fa fa-university"></i>
+				<div class="title">Profile</div>
+			</div>
+			<div class="column" onclick="getJobDetails()">
+				<i class="fa fa-paw"></i>
+				<div class="title">Jobs</div>
+			</div>
+			<div class="clear"></div>
+		</div>
+		
+		<div class="jobDetials pages pages_2">
+			<div class="row" >
+				<div class="row">
+					<div class="title">Job Code</div><div class="info">: SP001</div>
+					<div class="clear"></div>
+				</div>
+				<div class="row">
+					<div class="title">Position</div><div class="info">: Senior Coldfusion Developer</div>
+					<div class="clear"></div>
+				</div>
+				<div class="row">
+					<div class="title">Closing Date</div><div class="info">: 30/06/2015</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="backBtn back" onclick="nextPage(1)">Back</div>
+			</div>
 		</div>
 	</body>
 </html>
