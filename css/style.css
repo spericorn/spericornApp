@@ -1,8 +1,8 @@
 /* conmen styles begin*/
 .formControl {
 	display: block;
-	width: 92.5%;
-	padding: 6px 12px;
+	width: 100%;
+	padding: 6px 0;
 	font-size: 14px;
 	line-height: 1.42857143;
 	color: #555;
@@ -76,9 +76,8 @@
 /* conmen styles end */
 
 .loginWrap {
-	width: 92%;
+	width: 100%;
 	margin: 0 auto;
-	max-width: 434px;
 }
 .loginWrapBody{	
 	width: 100%;
@@ -132,10 +131,13 @@
 	-webkit-box-shadow: 0px 0px 5px #ddd;
 	-moz-box-shadow: 0px 0px 5px #ddd;
 	margin: 5px;
-	max-width: 300px;
-	width: 8%;
+	max-width: 48%;
+	width: 50%;
 	text-align: center;
 	cursor:pointer;
+}
+.employePortel .column:nth-child(2) {
+   float:right;
 }
 .employePortel .column .title{
 	text-align: center;
@@ -145,7 +147,7 @@
 	float:left;
 	width: 154px;
 }
-.jobDetials >.row{	
+.jobDetials .row_1 >.row{	
 	margin: 5px 0;
 	border-bottom: 1px solid rgb(216, 213, 213);
 }
@@ -154,4 +156,96 @@
 }
 .pages_0{
 	display:block;
+}
+.employePortel{
+	width:100%;
+	margin:auto;
+}
+.profilePage {
+	position: relative;
+	color: rgb(97, 97, 97);
+}
+.profilePage .image{
+	text-align: center;
+	height: 172px;
+	overflow: hidden;
+}
+.profilePage .image img{
+	width:13%;
+	top: -16px;
+	position: relative;
+}
+.profileInfo >.row{
+	border-radius: 5px 5px 5px 5px;
+	-moz-border-radius: 5px 5px 5px 5px;
+	-webkit-border-radius: 5px 5px 5px 5px;
+	border: 0px solid #000000;
+	background: rgba(255,255,255,1);
+	background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+	background: -webkit-gradient(left top, left bottom, color-stop(0%, rgba(255,255,255,1)), color-stop(47%, rgba(246,246,246,1)), color-stop(100%, rgba(237,237,237,1)));
+	background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+	background: -o-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+	background: -ms-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+	background: linear-gradient(to bottom, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed', GradientType=0 );
+	padding: 12px 5px;
+}
+.profileInfo .row .infoLabel{
+	float:left;
+	max-width: 50%;
+	width: 50%;
+}
+.profileInfo .row .info{
+	float:left;
+}
+/* ------------------ RESPONSIVE DESIGN ------------ */
+
+@media screen and (max-width:1043px)  {
+	.employePortel .column{
+		max-width: 47%;
+	}
+}
+
+@media screen and (max-width:967px)  {
+	
+}
+
+@media screen and (max-width:768px) {
+	
+}
+
+@media screen and (max-width:704px) {
+	.employePortel .column{
+		max-width: 46%;
+	}
+}
+
+@media screen and (max-width:604px) {
+	
+}
+
+@media screen and (max-width:568px) {
+	.employePortel .column{
+		max-width: 45%;
+	}
+}
+
+@media screen and (max-width:480px) {
+	.employePortel .column{
+		max-width: 44%;
+	}
+}
+
+@media screen and (max-width:365px) {
+	.employePortel .column{
+		max-width: 43%;
+	}
+}
+ 
+@media screen and (max-width:320px) { 
+
+}
+
+@media screen and (max-width:240px) { 
+
 }

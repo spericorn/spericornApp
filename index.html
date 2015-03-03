@@ -23,7 +23,6 @@
 						alert("PhoneGap is now loaded!");
 					}, false);
 				}, false);
-			
 			});
 			
 			function checkLogin(){
@@ -64,6 +63,27 @@
 				$(ele).parent().append('<div class="error">'+messege+'</div>')
 				$(ele).addClass('has-error');				
 			}
+			function getProfile(){
+				if(loginId>0){
+					$.ajax({
+						type : 'GET',
+						url  :"http://spericorn.com/spapp/cfc/api.cfc?method=getProfile",
+						dataType:"JSON",
+						data: {id :loginId},
+						success:function(res) {
+							$('.profilePage .image img').attr("src","http://spericorn.com/spapp/uploads/pp/"+res.DATA[0][5]);
+							$('.profileInfo .name').html(res.DATA[0][1]+' '+res.DATA[0][2]);
+							$('.profileInfo .email').html(res.DATA[0][6]);
+							$('.profileInfo .phone').html(res.DATA[0][4]);
+							$('.profileInfo .address').html(res.DATA[0][3]);
+							nextPage(2);
+						}
+					});	
+				}else{
+					$('.profilePage .name').html('you are not log in!');
+					nextPage(2);
+				}
+			}
 			function getJobDetails(){
 				$.ajax({
 					type : 'GET',
@@ -74,10 +94,10 @@
 						var obj = res;
 						var appenString ='';
 						for(i=0;i<obj.DATA.length;i++){  
-							appenString = appenString+ '<div class="row"><div class="title">Job Code</div><div class="info">: '+obj.DATA[i][2]+'</div><div class="clear"></div></div><div class="row"><div class="title">Position</div><div class="info">: '+obj.DATA[i][1]+'</div><div class="clear"></div></div><div class="row"><div class="title">Closing Date</div><div class="info">: '+obj.DATA[i][4]+'</div><div class="clear"></div></div>'
+							appenString = appenString+ '<div class="row" ><div class="row"><div class="title">Job Code</div><div class="info">: '+obj.DATA[i][2]+'</div><div class="clear"></div></div><div class="row"><div class="title">Position</div><div class="info">: '+obj.DATA[i][1]+'</div><div class="clear"></div></div><div class="row"><div class="title">Closing Date</div><div class="info">: '+obj.DATA[i][4]+'</div><div class="clear"></div></div></div>'
 						}
-						$('.jobDetials .row').html(appenString);
-						nextPage(2);
+						$('.jobDetials .row_1').html(appenString);
+						nextPage(3);
 					}
 				});
 			}
@@ -115,7 +135,7 @@
 		</div>
 		
 		<div class="employePortel pages pages_1" >
-			<div class="column">
+			<div class="column" onclick="getProfile()">
 				<i class="fa fa-university"></i>
 				<div class="title">Profile</div>
 			</div>
@@ -125,9 +145,40 @@
 			</div>
 			<div class="clear"></div>
 		</div>
+			
+		<div class="profilePage pages pages_2" >
+			<div class="image">
+				<img src="http://spericorn.com/spApp/uploads/pp/es.png" />
+			</div>
+			<div class="profileInfo">
+				<div class="row">
+					<div class="infoLabel">Name</div>
+					<div class="info name"></div>
+					<div class="clear"></div>
+				</div>
+				<div class="row">
+					<div class="infoLabel">Email</div>
+					<div class="info email"></div>
+					<div class="clear"></div>
+				</div>
+				<div class="row">
+					<div class="infoLabel">Phone</div>
+					<div class="info phone"></div>
+					<div class="clear"></div>
+				</div>
+				<div class="row">
+					<div class="infoLabel">Address</div>
+					<div class="info address"></div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="footer">
+				<div class="backBtn back" onclick="nextPage(1)">Back</div>
+			</div>
+		</div>
 		
-		<div class="jobDetials pages pages_2">
-			<div class="row" >
+		<div class="jobDetials pages pages_3">
+			<div class="row_1" >
 				<div class="row">
 					<div class="title">Job Code</div><div class="info">: SP001</div>
 					<div class="clear"></div>
